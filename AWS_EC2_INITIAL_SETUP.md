@@ -115,7 +115,7 @@ This guide will walk you through setting up an EC2 (Free Tier) Instance on AWS.
         - Open bash
     ---
     - Run the following command in your terminal, but use your IP address:
-        - `ssh -i ~/profile-server.pem ubuntu@52.13.121.237
+        - `ssh -i ~/profile-server.pem ubuntu@52.13.121.237`
     - Type `yes` you want to continue then press enter.
     - If everything worked you should see the following output in your terminal, note your prompt now says `ubuntu@ip-172-31-24-185:~$` *(Your local IP may vary)*:
         # ![Terminal Logged into instance](images/terminal-logged-in.png)
