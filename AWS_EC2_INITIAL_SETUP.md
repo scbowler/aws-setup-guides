@@ -84,3 +84,44 @@ This guide will walk you through setting up an EC2 (Free Tier) Instance on AWS.
 1. You should now be on the instances page
     - **NOTE** You will probably only have one instance listed
     # ![Instances page](images/instances.png)
+1. Hover over your instance in the table, in the name column, a pencil should appear. Click the pencil to edit your instance's name. Name it `Profile Server`.
+    # ![Edit instance name](images/edit-instance-name.png)
+    # ![Instance name set](images/instance-name-set.png)
+1. In the left hand menu find the `NETWORK & SECURITY` section. Click on the `Elastic IPs` link.
+    # ![Elastic IPs Link](images/elastic-ips-link.png)
+1. On the **"Elastic IP addresses"** page, click on the orange `Allocate Elastic IP address` button.
+    # ![Allocate IP address button](images/allocate-elastic-ip-address-button.png)
+1. On the **"Allocate Elastic IP address"** page, click the orange `Allocate` button on the bottom right of the page.
+    - **NOTE** Your version of this page may look a little different than the image below.
+    # ![Allocate Button](images/allocate-button.png)
+1. You should now see this page with a green success message box at the top that says **"Elastic IP address allocated."**
+    # ![Elastic IP address allocated](images/elastic-ip-address-allocated.png)
+1. Write down your new IP address, you will need it again.
+    # ![Your IP Address](images/your-ip-address.png)
+1. Click on the `Actions` button in the top right of the page, then click on the `Associate Elastic IP address` option.
+    # ![Associate IP address option](images/associate-ip-address.png)
+1. On the **"Associate Elastic IP address"** page, click on the `Instance` input then select your instance it should say `(Profile Server)` next to its ID.
+    # ![Select Your Instance](images/select-instance.png)
+1. Click the orange `Associate` button at the bottom right of the page.
+    # ![Associate button](images/associate.png)
+1. In the left side menu under the `INSTANCES` section click on the `Instances` link.
+    # ![Instances Link](images/instances-link.png)
+1. In the table of the **"Instances"** view you should see your Elastic IP Address associated with your instance. You may need to scroll to the left depending on your screen size.
+    # ![Instance with associated elastic IP Address](images/instance-with-elastic-ip.png)
+1. Now it's time to log into your instance!
+    - ### MAC or LINUX
+        - Open terminal
+    - ### Windows
+        - Open bash
+    ---
+    - Run the following command in your terminal, but use your IP address:
+        - `ssh -i ~/profile-server.pem ubuntu@52.13.121.237
+    - Type `yes` you want to continue then press enter.
+    - If everything worked you should see the following output in your terminal, note your prompt now says `ubuntu@ip-172-31-24-185:~$` *(Your local IP may vary)*:
+        # ![Terminal Logged into instance](images/terminal-logged-in.png)
+
+### NOTE: To log out of your instance type `exit` then press `enter`
+
+## You are done! You have successfully set up an EC2 instance with an Ubuntu OS
+
+This is only the beginning, the next lesson is on setting up a **Nginx** web server on your instance.
