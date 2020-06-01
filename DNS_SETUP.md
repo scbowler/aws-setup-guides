@@ -6,6 +6,13 @@ This guide will walk you through setting up your DNS for your domain name.
 
 A Records are the most basic type of DNS record and are used to point a domain or subdomain to an IP address.  You only need to do this the first time you are setting up your EC2 instance.  Once you have received your elastic ip address you must setup an `A Record` to have your domain name service point to ip address where your nginx server is hosted.
 
+
+Setting up an A Record on:
+- [namecheap.com](#setting-an-a-record-on-namecheap.com)
+- [name.com](#setting-an-a-record-on-name.com)
+- [hover.com](#setting-an-a-record-on-hover.com)
+
+
 ### Setting an A Record on namecheap.com
 
 1. Login to namecheap.com and land on account page
@@ -30,6 +37,9 @@ A Records are the most basic type of DNS record and are used to point a domain o
 
     ![namecheap domain manage](images/dns_setup/namecheap-4.png)
 
+    [Setting a CNAME record on namecheap.com](#setting-a-cname-record-on-namecheap.com)
+
+
 ### Setting an A Record on name.com
 
 1. Login to name.com and land on the account page
@@ -49,6 +59,9 @@ A Records are the most basic type of DNS record and are used to point a domain o
     1. The third field is the elastic ip address you got from aws.
 
     ![name domain manage](images/dns_setup/name-3.png)
+
+    [Setting a CNAME record on name.com](#setting-a-cname-record-on-name.com)
+
 
 ### Setting an A Record on hover.com
 
@@ -74,9 +87,19 @@ A Records are the most basic type of DNS record and are used to point a domain o
 
     ![hover domain manage](images/dns_setup/hover-4.png)
 
-### Adding a CNAME Record
+    [Setting a CNAME record on hover.com](#setting-a-cname-record-on-hover.com)
 
-The DNS CNAME record works as an alias for domain names that share a single IP address.  Every time you want to deploy a web application for your portfolio, you will need to do this.
+
+___
+
+## Adding a CNAME Record
+
+The DNS CNAME record works as an alias for domain names that share a single IP address.  CNAME records tell the subdomain to use the same IP address as your A record. With multiple web applications, you create multiple CNAME records so if you ever have to change your IP address, you only have to do it once. Every time you want to deploy a web application for your portfolio, you will need to do this.
+
+Setting up a CNAME Record on:
+- [namecheap.com](#setting-a-cname-record-on-namecheap.com)
+- [name.com](#setting-a-cname-record-on-name.com)
+- [hover.com](#setting-a-cname-record-on-hover.com)
 
 ### Setting a CNAME Record on namecheap.com
 
