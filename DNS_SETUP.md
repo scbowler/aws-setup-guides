@@ -2,6 +2,11 @@
 
 This guide will walk you through setting up your DNS for your domain name.
 
+Upon completion of setting up your DNS Settings checkout the following guides to finish your deployment.
+
+- [Deploying a Full Stack Application](https://github.com/Learning-Fuze/full-stack-project/blob/master/guides/DEPLOYMENT.md)
+- [Deploying a Static Application](https://github.com/Learning-Fuze/memory_match/tree/master/guides/deployment)
+
 ## Adding an A Record
 
 A Records are the most basic type of DNS record and are used to point a domain or subdomain to an IP address.  You only need to do this the first time you are setting up your EC2 instance.  Once you have received your elastic ip address you must setup an `A Record` to have your domain name service point to ip address where your nginx server is hosted.
