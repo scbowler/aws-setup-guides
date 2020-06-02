@@ -50,7 +50,7 @@ This guide will walk you through setting up an EC2 (Free Tier) Instance on AWS.
 1. Once you have ensured everything is correct, click the blue `Launch` button in the bottom right corner.
     # ![Click blue launch button](images/aws_ec2_initial_setup/launch.png)
 1. You should see a modal pop up that says **"Select an existing key pair or create a new key pair"**.
-    ### THESE STEPS ARE VERY IMPORTANT!! Without this file you can not access your server!
+    ### THESE STEPS ARE VERY IMPORTANT!! Without this file you can not access your EC2 instance!
     1. In the first dropdown select **"Create a new key pair"**.
     1. In the input give your key pair a name, name it `profile-server`.
         - **NOTE** You can name it something different just be aware it will change some of the below commands. Any command that references the key file needs to match whatever name you choose. If this is your first time you should stick with the suggested name: (`profile-server`)

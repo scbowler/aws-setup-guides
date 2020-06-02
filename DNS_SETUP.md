@@ -1,28 +1,28 @@
 # DNS Setup
 
-This guide will walk you through setting up your DNS for your domain name.
+This guide will walk you through setting up DNS records for your domain name.
 
-Upon completion of setting up your DNS Settings checkout the following guides to finish your deployment.
+Upon completion of adding your DNS records, check out the following guides to finish your deployments.
 
 - [Deploying a Full Stack Application](https://github.com/Learning-Fuze/full-stack-project/blob/master/guides/DEPLOYMENT.md)
 - [Deploying a Static Application](https://github.com/Learning-Fuze/memory_match/tree/master/guides/deployment)
 
 ## Adding an A Record
 
-A Records are the most basic type of DNS record and are used to point a domain or subdomain to an IP address.  You only need to do this the first time you are setting up your EC2 instance.  Once you have received your elastic ip address you must setup an `A Record` to have your domain name service point to ip address where your nginx server is hosted.
+A Records are the most basic type of DNS record and are used to point a domain or subdomain to an IP address.  You only need to do this the first time you are setting up your EC2 instance.  Once you have allocated an Elastic IP address to your EC2 instance, you must add an `A Record` to have your domain name service point to ip address where your nginx server is hosted.
 
 
-Setting up an A Record on:
-- [namecheap.com](#setting-an-a-record-on-namecheap.com)
-- [name.com](#setting-an-a-record-on-name.com)
-- [hover.com](#setting-an-a-record-on-hover.com)
+Adding an A Record on:
+- [namecheap.com](#adding-an-a-record-on:-namecheap.com)
+- [name.com](#adding-an-a-record-on:-name.com)
+- [hover.com](#adding-an-a-record-on:-hover.com)
 
 
-### Setting an A Record on namecheap.com
+### Adding an A Record on: namecheap.com
 
-1. Login to namecheap.com and land on account page
+1. Log in to namecheap.com and land on account page
 
-1. Click `Manage` on the domain name that you want to point to your server.
+1. Click `Manage` on the domain name that you want to point to your Elastic IP address.
 
     ![namecheap home](images/dns_setup/namecheap-1.png)
 
@@ -38,18 +38,20 @@ Setting up an A Record on:
 
     1. Set the first drop down to `A Record`
     1. The second field is `@` (the @ symbol represents your root domain.)
-    1. The third field is the elastic ip address you got from aws.
+    1. The third field is the Elastic IP address you allocated to your EC2 instance.
+
+
 
     ![namecheap domain manage](images/dns_setup/namecheap-4.png)
 
-    [Setting a CNAME record on namecheap.com](#setting-a-cname-record-on-namecheap.com)
+    [Adding a CNAME Record on: namecheap.com](#adding-a-cname-record-on:-namecheap.com)
 
 
-### Setting an A Record on name.com
+### Adding an A Record on: name.com
 
-1. Login to name.com and land on the account page
+1. Log in to name.com and land on the account page
 
-1. Click on the domain name that you want to point to your server.
+1. Click on the domain name that you want to point to your Elastic IP address.
 
     ![name home](images/dns_setup/name-1.png)
 
@@ -61,18 +63,18 @@ Setting up an A Record on:
 
     1. Set the first drop down to `A Record`
     1. The second field is your domain name
-    1. The third field is the elastic ip address you got from aws.
+    1. The third field is the Elastic IP address you got from AWS.
 
     ![name domain manage](images/dns_setup/name-3.png)
 
-    [Setting a CNAME record on name.com](#setting-a-cname-record-on-name.com)
+    [Adding a CNAME Record on: name.com](#adding-a-cname-record-on:-name.com)
 
 
-### Setting an A Record on hover.com
+### Adding an A Record on: hover.com
 
-1. Login to hover.com and land on the account page
+1. Log in to hover.com and land on the account page
 
-1. Click on the edit drop down of the domain name that you want to point to your server.
+1. Click on the edit drop down of the domain name that you want to point to your Elastic IP address.
 
     ![hover domains](images/dns_setup/hover-1.png)
 
@@ -92,23 +94,23 @@ Setting up an A Record on:
 
     ![hover domain manage](images/dns_setup/hover-4.png)
 
-    [Setting a CNAME record on hover.com](#setting-a-cname-record-on-hover.com)
+    [Adding a CNAME Record on: hover.com](#adding-a-cname-record-on:-hover.com)
 
 
 ___
 
 ## Adding a CNAME Record
 
-The DNS CNAME record works as an alias for domain names that share a single IP address.  CNAME records tell the subdomain to use the same IP address as your A record. With multiple web applications, you create multiple CNAME records so if you ever have to change your IP address, you only have to do it once. Every time you want to deploy a web application for your portfolio, you will need to do this.
+The DNS CNAME record works as an alias for domain names that share a single IP address.  CNAME records tell DNS resolvers to use the same IP address as your A record. With multiple web applications, you create multiple CNAME records so if you ever have to change your IP address, you only have to do it once. Every time you want to deploy a web application for your portfolio, you will need to do this.
 
-Setting up a CNAME Record on:
-- [namecheap.com](#setting-a-cname-record-on-namecheap.com)
-- [name.com](#setting-a-cname-record-on-name.com)
-- [hover.com](#setting-a-cname-record-on-hover.com)
+Adding a CNAME Record on:
+- [namecheap.com](#adding-a-cname-record-on:-namecheap.com)
+- [name.com](#adding-a-cname-record-on:-name.com)
+- [hover.com](#adding-a-cname-record-on:-hover.com)
 
-### Setting a CNAME Record on namecheap.com
+### Adding a CNAME Record on: namecheap.com
 
-1. Login to namecheap.com and land on account page
+1. Log in to namecheap.com and land on account page
 
 1. Click `Manage` on the domain name that you want to create the CNAME record for.
 
@@ -130,9 +132,9 @@ Setting up a CNAME Record on:
 
     ![namecheap domain manage](images/dns_setup/namecheap-5.png)
 
-### Setting a CNAME Record on name.com
+### Adding a CNAME Record on: name.com
 
-1. Login to name.com and land on the account page
+1. Log in to name.com and land on the account page
 
 1. Click on the domain name that you want to create the CNAME record for.
 
@@ -150,9 +152,9 @@ Setting up a CNAME Record on:
 
     ![name domain manage](images/dns_setup/name-4.png)
 
-### Setting a CNAME Record on hover.com
+### Adding a CNAME Record on: hover.com
 
-1. Login to hover.com and land on the account page
+1. Log in to hover.com and land on the account page
 
 1. Click on the edit drop down of the domain name that you want to create the CNAME record for.
 
