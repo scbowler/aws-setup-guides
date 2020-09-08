@@ -12,7 +12,7 @@ This guide will walk you through setting up Nginx on Ubuntu 18.04. This guide as
 
 1. Log into your EC2 instance *(If you are not already logged in)*
     - From your terminal run the following command, but use YOUR instance's IP address:
-        - `ssh -i ~/profile-server.pem ubuntu@52.13.121.237`
+        - `ssh -i ~/aws-ec2.pem ubuntu@52.13.121.237`
 1. Update your local package index by running the following command:
     - `sudo apt update`
 1. Install Nginx
