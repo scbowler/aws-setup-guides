@@ -4,8 +4,8 @@ This guide will walk you through setting up DNS records for your domain name.
 
 Upon completion of adding your DNS records, check out the following guides to finish your deployments.
 
-- [Deploying a Full Stack Application](https://github.com/Learning-Fuze/full-stack-project/blob/master/guides/DEPLOYMENT.md)
-- [Deploying a Static Application](https://github.com/Learning-Fuze/memory_match/tree/master/guides/deployment)
+- [Deploying a Full Stack Application](./FULL_STACK_DEPLOYMENT.md)
+- [Deploying a Static Application](./STATIC_DEPLOYMENT.md)
 
 ## Adding an A Record
 
