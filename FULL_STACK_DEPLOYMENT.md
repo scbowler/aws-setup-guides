@@ -28,7 +28,7 @@ If you are unable to connect, notify an instructor right away.
 
 You will be deploying your project more than one time as the application gains functionality or bugs are discovered and fixed. There is some setup required for your **first** deployment that is not required for subsequent deployments. This section covers that setup.
 
-When you deploy your **first** full stack JavaScript project to an EC2 instance on AWS, you'll need to make sure that some tools are installed on your EC2 instance. After they've been installed once, they won't need to be installed again for future deployments of the same project or the deployment of additional full stack JavaScript projects.
+When you deploy your **first** full stack JavaScript project to an EC2 instance on AWS, you'll need to make sure that some tools are installed on your EC2 instance. After they've been installed once, they won't need to be installed again for future deployments of the same project or the deployment of additional full stack JavaScript projects. If these tools are already installed, skip straight to the [First Deployment](#first-deployment) section.
 
 This guide assumes EC2 Ubuntu 18.04 so all setup commands will be based on that.
 
@@ -299,7 +299,7 @@ When web browsers visit your project, they'll be making HTTP requests to your Ng
 
 #### Copy the Template
 
-Your starter files should have included a reference configuration in `server/full-stack-project.example.conf`. Copy this file now, giving it a name that matches your project's subdomain.
+Your starter files may have included a reference configuration in `server/full-stack-project.example.conf`. Copy this file now, giving it a name that matches your project's subdomain.
 
 > For example, if your project's subdomain is `full-stack-project.learningfuze.com`, then your configuration file's name should be `full-stack-project.learningfuze.com`. **There is no `.conf` at the end of the final file.**
 
@@ -309,9 +309,11 @@ Your starter files should have included a reference configuration in `server/ful
 sudo cp server/full-stack-project.example.conf /etc/nginx/sites-available/full-stack-project.learningfuze.com
 ```
 
+**Note:** If your starter files did _not_ include a reference config, then you'll have to create it from scratch using `nano` in the next step.
+
 #### Edit the Configuration File
 
-Now use `nano` to edit the copy you've created. Replace `full-stack-project.learningfuze.com` with your config file's name.
+Now use `nano` to edit the copy you've created (or create it if it doesn't exist yet). Replace `full-stack-project.learningfuze.com` with your config file's name.
 
 **Note:** The default `ubuntu` user account of your EC2 instance does not have permission to modify files outside of its home directory, so the `nano` command will need to start with `sudo` to temporarily use the `root` user account.
 
@@ -319,7 +321,7 @@ Now use `nano` to edit the copy you've created. Replace `full-stack-project.lear
 sudo nano /etc/nginx/sites-available/full-stack-project.learningfuze.com
 ```
 
-Modify the `server_name`, `root`, and `proxy_pass` directives in the configuration file. For example, if your project name is `fart-app` and your domain is `lol.com`, and the `PORT` you'll be using is `3003`, then your configuration file should look like this:
+Modify the `server_name`, `root`, and `proxy_pass` directives in the configuration file. The `proxy_pass` port number should match the `PORT` in your project's `.env` file. For example, if your project name is `fart-app` and your domain is `lol.com`, and the `PORT` you'll be using is `3003`, then your configuration file should look like this:
 
 ```conf
 server {
