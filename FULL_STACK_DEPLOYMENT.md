@@ -325,36 +325,35 @@ For example, if your project name is `fart-app` and your domain is `lol.com`, an
 
 ```conf
 server {
-    # The following server_name rule should equal
-    # the domain name for the project, including
-    # sub-domain.
+    # The following server_name rule should equal the domain name for the
+    # project, including sub-domain.
     server_name fart-app.lol.com;
 
-    # The following root rule should equal the full directory path of the project's `index.html` file.
+    # The following root rule should equal the full directory path of the
+    # project's `index.html` file.
     root /home/ubuntu/fart-app.lol.com/server/public;
 
-    # The following location block should be added if using React Router
+    # The following location block should be added if using React Router.
     #
     # location / {
     #   try_files $uri $uri/ /index.html;
     # }
 
     location /api {
-        # The following Host and X-Real-IP headers
-        # should be added if your Node.js back end needs them.
+        # The following Host and X-Real-IP headers should be added if your
+        # Node.js back end needs them.
         #
         # proxy_set_header Host $host;
         # proxy_set_header X-Real-IP $remote_addr;
 
-        # The following Upgrade and Connection headers
-        # should be added if proxying a websocket server.
+        # The following Upgrade and Connection headers should be added if
+        # proxying a websocket server.
         #
         # proxy_set_header Upgrade $http_upgrade;
         # proxy_set_header Connection $connection_upgrade;
 
-        # The following proxy_pass rule should have its
-        # port number equal to the PORT in the
-        # project's .env file.
+        # The following proxy_pass rule should have its port number equal to
+        # the PORT in the project's .env file.
         proxy_pass http://localhost:3003;
     }
 }
