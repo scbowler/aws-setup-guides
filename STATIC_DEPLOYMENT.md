@@ -108,6 +108,10 @@ server {
     # The following root rule should equal the full directory path of the
     # project's `index.html` file.
     root /home/ubuntu/$server_name;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
 }
 ```
 
