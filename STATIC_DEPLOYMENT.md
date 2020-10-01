@@ -1,8 +1,8 @@
-# Deployment a Static Web Application to Ubuntu on AWS EC2
+# Deploying a Front-End Web Application to NGINX on an AWS EC2 Host w/Ubuntu 18.04
 
-This guide outlines steps for deploying a static web application to an EC2 instance on AWS.  By static we mean an application that does not have a back end or a database to set up.  For instructions on how to deploy a full stack application please go [here](./FULL_STACK_DEPLOYMENT.md). The guide assumes that you have already provisioned an EC2 instance, that you have SSH access to the instance, along with nginx and certbot installed. Some parts of this guide may have been covered during class, but they are recorded here for future reference.
+This guide outlines steps for deploying a web application without any server-side processes to an NGINX web server running on an AWS EC2 instance with an Ubuntu 18.04 operating system. For instructions on how to deploy a full-stack application please see the [Full-Stack Deployment Guide](FULL_STACK_DEPLOYMENT.md). This guide assumes that you have already [provisioned an EC2 instance with SSH access](AWS_EC2_INITIAL_SETUP.md), and have installed [NGINX](INSTALL_NGINX_ON_UBUNTU.md) and [certbot](https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx) on it. It also assumes you already have a purchased domain name. Some parts of this guide may have been covered during class, but they are recorded here for future reference.
 
-**Note:** This guide may use "EC2 Instance" and "Ubuntu" interchangeably, because your EC2 instance _should_ be running the Ubuntu operating system.
+**Note:** This guide may use "EC2 Instance" and "Ubuntu" interchangeably.
 
 ## Required Tools
 
