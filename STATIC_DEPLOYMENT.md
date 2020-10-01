@@ -4,23 +4,19 @@ This guide outlines steps for deploying a web application without any server-sid
 
 **Note:** This guide may use "EC2 Instance" and "Ubuntu" interchangeably.
 
-## Required Tools
-
-This guide assumes EC2 Ubuntu 18.04 so all setup commands will be based on that.
-
 ### Create a Subdomain
 
 Visit your domain name registrar and create a new `CNAME` DNS record for your project. The `CNAME` record should point to your main domain name.
 
 > For example, if your domain name is `yourdomain.com` and your project's name is `memory-match`, then you'll create a `CNAME` record for `memory-match.yourdomain.com` that points to `yourdomain.com`.
 
-Here is an example gif if for `namecheap.com`:
+Watch how a `memory-match` subdomain is set up on [namecheap.com](https://www.namecheap.com):
 
 <p align='center'>
-    <img src="images/static_deployment/mm-deployment-1.gif">
+    <img src="images/static_deployment/mm-deployment-1.gif" alt="Memory Match DNS Setup on namecheap.com">
 <p>
 
-For additional help on creating a subdomain, checkout the [DNS setup guide.](./DNS_SETUP.md)
+For additional help on creating a subdomain, follow the [DNS setup guide](DNS_SETUP.md).
 
 ### Clone the Project
 
@@ -35,7 +31,7 @@ ssh -i <location of pem file> ubuntu@<ip address>
     <img src="images/static_deployment/mm-deployment-2.gif">
 <p>
 
-You'll want to clone the project's source code into your home directory. Confirm that your current working directory is `/home/ubuntu` with the `pwd` command.
+Clone the project's source code into your home directory. Confirm that your current working directory is `/home/ubuntu` with the `pwd` command.
 
 ```bash
 pwd
@@ -45,7 +41,7 @@ pwd
     <img src="images/static_deployment/mm-deployment-3.gif">
 <p>
 
-Ubuntu comes with `git` preinstalled so you can clone the project now. Replace `username` with the owner of the repository, `memory-match` with the name of the project, and `memory-match.yourdomain.com` with your project's subdomain. If the repository is private, then you'll be prompted for your GitHub username and password.
+Ubuntu comes with `git` pre-installed so you can clone the project now. Replace `username` with the owner of the repository, `memory-match` with the name of the project, and `memory-match.yourdomain.com` with your project's subdomain. If the repository is private, then you'll be prompted for your GitHub username and password.
 
 ```bash
 git clone https://github.com/username/memory-match memory-match.yourdomainhere.com
@@ -71,7 +67,7 @@ cd memory-match.yourdomainhere.com
     <img src="images/static_deployment/mm-deployment-5.gif">
 <p>
 
-### Configure a Virtual Host for Nginx
+### Configure a Virtual Host for NGINX
 
 When web browsers visit your project, they'll be making HTTP requests to your Nginx web server. However, Nginx doesn't know anything about your project by default. Therefor, a special configuration file needs to be created.
 
@@ -101,20 +97,15 @@ Modify the `server_name` and `root` directives in the configuration file. For ex
 
 ```conf
 server {
+    # The following server_name rule should equal the domain name for the
+    # project, including sub-domain.
+    server_name memory-match.yourdomainhere.com;
 
-  server_name memory-match.yourdomainhere.com;
-
-  root /home/ubuntu/$server_name;
-
-  location / {
-    try_files $uri $uri/ =404;
-  }
-
+    # The following root rule should equal the full directory path of the
+    # project's `index.html` file.
+    root /home/ubuntu/$server_name;
 }
-
 ```
-
-Your root should be pointing to the directory that has your `index.html`.  Keep in mind if your `index.html` is in a directory within your root directory, this will not work.  So please adjust accordingly.
 
 #### Enable the Site
 
