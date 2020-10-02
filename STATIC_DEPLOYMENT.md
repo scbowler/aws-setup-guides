@@ -1,12 +1,12 @@
-# Deployment a Static Web Application to Ubuntu on AWS EC2
+# Deploying a Front-End Web App to NGINX on an AWS EC2 Host w/Ubuntu 18.04
 
-This guide outlines steps for deploying a static web application to an EC2 instance on AWS.  By static we mean an application that does not have a back end or a database to set up.  For instructions on how to deploy a full stack application please go [here](./FULL_STACK_DEPLOYMENT.md). The guide assumes that you have already provisioned an EC2 instance, that you have SSH access to the instance, along with nginx and certbot installed. Some parts of this guide may have been covered during class, but they are recorded here for future reference.
+This guide outlines steps for deploying a web application without any custom back-end code to an NGINX web server running on an AWS EC2 instance with an Ubuntu 18.04 operating system. For instructions on how to deploy a full-stack application please see the [Full-Stack Deployment Guide](FULL_STACK_DEPLOYMENT.md). Some parts of this guide may have been covered during class, but they are recorded here for future reference.
 
-**Note:** This guide may use "EC2 Instance" and "Ubuntu" interchangeably, because your EC2 instance _should_ be running the Ubuntu operating system.
+**Note:** This guide may use "EC2 Instance" and "Ubuntu" interchangeably.
 
 ## Required Tools
 
-This guide assumes EC2 Ubuntu 18.04 so all setup commands will be based on that.
+This guide assumes that you have already [provisioned an EC2 instance with SSH access](AWS_EC2_INITIAL_SETUP.md), and have installed [NGINX](INSTALL_NGINX_ON_UBUNTU.md) and [certbot](https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx) on it. It also assumes you have already purchased a domain name.
 
 ### Create a Subdomain
 
@@ -14,13 +14,13 @@ Visit your domain name registrar and create a new `CNAME` DNS record for your pr
 
 > For example, if your domain name is `yourdomain.com` and your project's name is `memory-match`, then you'll create a `CNAME` record for `memory-match.yourdomain.com` that points to `yourdomain.com`.
 
-Here is an example gif if for `namecheap.com`:
+Watch how a `memory-match` subdomain is set up on [namecheap.com](https://www.namecheap.com):
 
 <p align='center'>
-    <img src="images/static_deployment/mm-deployment-1.gif">
+    <img src="images/static_deployment/mm-deployment-1.gif" alt="Memory Match DNS Setup on namecheap.com">
 <p>
 
-For additional help on creating a subdomain, checkout the [DNS setup guide.](./DNS_SETUP.md)
+For additional help on creating a subdomain, follow the [DNS setup guide](DNS_SETUP.md).
 
 ### Clone the Project
 
@@ -35,7 +35,7 @@ ssh -i <location of pem file> ubuntu@<ip address>
     <img src="images/static_deployment/mm-deployment-2.gif">
 <p>
 
-You'll want to clone the project's source code into your home directory. Confirm that your current working directory is `/home/ubuntu` with the `pwd` command.
+Clone the project's source code into your home directory. Confirm that your current working directory is `/home/ubuntu` with the `pwd` command.
 
 ```bash
 pwd
@@ -45,7 +45,7 @@ pwd
     <img src="images/static_deployment/mm-deployment-3.gif">
 <p>
 
-Ubuntu comes with `git` preinstalled so you can clone the project now. Replace `username` with the owner of the repository, `memory-match` with the name of the project, and `memory-match.yourdomain.com` with your project's subdomain. If the repository is private, then you'll be prompted for your GitHub username and password.
+Ubuntu comes with `git` pre-installed so you can clone the project now. Replace `username` with the owner of the repository, `memory-match` with the name of the project, and `memory-match.yourdomain.com` with your project's subdomain. If the repository is private, then you'll be prompted for your GitHub username and password.
 
 ```bash
 git clone https://github.com/username/memory-match memory-match.yourdomainhere.com
@@ -71,7 +71,7 @@ cd memory-match.yourdomainhere.com
     <img src="images/static_deployment/mm-deployment-5.gif">
 <p>
 
-### Configure a Virtual Host for Nginx
+### Configure a Virtual Host for NGINX
 
 When web browsers visit your project, they'll be making HTTP requests to your Nginx web server. However, Nginx doesn't know anything about your project by default. Therefor, a special configuration file needs to be created.
 
@@ -101,20 +101,19 @@ Modify the `server_name` and `root` directives in the configuration file. For ex
 
 ```conf
 server {
+    # The following server_name rule should equal the domain name for the
+    # project, including sub-domain.
+    server_name memory-match.yourdomainhere.com;
 
-  server_name memory-match.yourdomainhere.com;
+    # The following root rule should equal the full directory path of the
+    # project's `index.html` file.
+    root /home/ubuntu/$server_name;
 
-  root /home/ubuntu/$server_name;
-
-  location / {
-    try_files $uri $uri/ =404;
-  }
-
+    location / {
+        try_files $uri $uri/ =404;
+    }
 }
-
 ```
-
-Your root should be pointing to the directory that has your `index.html`.  Keep in mind if your `index.html` is in a directory within your root directory, this will not work.  So please adjust accordingly.
 
 #### Enable the Site
 
