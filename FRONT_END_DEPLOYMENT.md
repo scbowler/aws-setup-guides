@@ -85,7 +85,7 @@ Use `nano` to create and edit an NGINX config for your project. It should be cre
 > **Example**:  If the project is being deployed to the `code-journal` subdomain of the `yourdomain.com` root domain, then you'd start editing the file like:
 
 ```bash
-ubuntu@some-ip-address:~$ sudo nano /etc/nginx/sites-available/code-journal.yourdomainhere.com
+ubuntu@some-ip-address:~$ sudo nano /etc/nginx/sites-available/code-journal.yourdomain.com
 ```
 
 Fill out the contents of the file to match the example config below, replacing the value of the `server_name` field with your FQDN.
@@ -94,7 +94,7 @@ Fill out the contents of the file to match the example config below, replacing t
 server {
     # The following server_name rule should equal fully qualified domain name
     # for the project, minus the trailing period.
-    server_name code-journal.yourdomainhere.com;
+    server_name code-journal.yourdomain.com;
 
     # The following root rule should equal the full directory path of the
     # project's `index.html` file.
@@ -112,11 +112,11 @@ After you're done editing the file's contents, save (write-out) the file, then q
 
 Once your site's NGINX configuration file has been created, it's time to turn it on.
 
-**Note:** The default `ubuntu` user account of your EC2 instance does not have permission to modify files outside of its home directory, so the `ln` command will need to start with `sudo` to temporarily use the `root` user account. Replace `code-journal.yourdomainhere.com` with your own configuration file's name.
+**Note:** The default `ubuntu` user account of your EC2 instance does not have permission to modify files outside of its home directory, so the `ln` command will need to start with `sudo` to temporarily use the `root` user account. Replace `code-journal.yourdomain.com` with your own configuration file's name.
 
 1. Add the site to the list of enabled sites.
     ```bash
-    ubuntu@some-ip-address:~$ sudo ln -s /etc/nginx/sites-available/code-journal.yourdomainhere.com /etc/nginx/sites-enabled/
+    ubuntu@some-ip-address:~$ sudo ln -s /etc/nginx/sites-available/code-journal.yourdomain.com /etc/nginx/sites-enabled/
     ```
 1. Test your new configuration file for valid syntax using the `nginx -t` tool. You should see confirmation messages that your configuration is valid.
     ```bash
