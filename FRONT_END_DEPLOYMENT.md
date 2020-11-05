@@ -46,47 +46,47 @@ If you are unable to connect, notify an instructor right away.
 
 ### Clone the Project
 
-Clone the project's source code into your home directory. Confirm that your current working directory is `/home/ubuntu` with the `pwd` command.
+While connected to your EC2 instance over SSH, you'll want to clone the project's source code into your home directory. Confirm that your current working directory is `/home/ubuntu` with the `pwd` command.
 
 ```bash
-pwd
+ubuntu@some-ip-address:~$ pwd
+/home/ubuntu
+ubuntu@some-ip-address:~$
 ```
 
-<p align='center'>
-    <img src="images/static_deployment/mm-deployment-3.gif">
-<p>
+Ubuntu comes with `git` pre-installed, so you can clone the project now. Use the `git clone` command to clone the project, passing it both the `<repository>` and `<directory>` arguments. `<repository>` should equal the project's clone address and `<directory>` should equal the [fully qualified domain name (FQDN)](https://en.wikipedia.org/wiki/Fully_qualified_domain_name), minus the trailing period (`.`), of the subdomain set up with the domain name registrar. If the repository is private, you'll be prompted for your GitHub username and password.
 
-Ubuntu comes with `git` pre-installed so you can clone the project now. Replace `username` with the owner of the repository, `memory-match` with the name of the project, and `memory-match.yourdomain.com` with your project's subdomain. If the repository is private, then you'll be prompted for your GitHub username and password.
+> **Example**: If the project's GitHub repository is `username/project-name` and the project is being deployed to the `blog` subdomain of the `yourdomain.com` root domain, then cloning the project would look like:
 
 ```bash
-git clone https://github.com/username/memory-match memory-match.yourdomainhere.com
+ubuntu@some-ip-address:~$ git clone https://github.com/username/project-name.git blog.yourdomain.com
 ```
 
 After the project is successfully cloned, running the `ls` command should show the project directory.
 
 ```bash
-ls
+ubuntu@some-ip-address:~$ ls
+...     ...                     ...
+...     blog.yourdomain.com     ...
+...     ...                     ...
+ubuntu@some-ip-address:~$
 ```
 
-<p align='center'>
-    <img src="images/static_deployment/mm-deployment-4.gif">
-<p>
+### Configure a Virtual Host for NGINX
 
-The next few steps will be done from within the project directory, so change directories to the project. Replace `memory-match.yourdomainhere.com` with your subdomain.
+When web browsers visit your project, they'll be making HTTP requests to your NGINX web server. However, NGINX doesn't know anything about your project by default, it needs to be configured to serve up your project's site. A special configuration file needs to be created.
+
+#### Copy the Template
+
+The next few steps will be done from within the project directory, so change directories to the project. Replace `code-journal.yourdomainhere.com` with your subdomain.
 
 ```bash
-cd memory-match.yourdomainhere.com
+cd code-journal.yourdomainhere.com
 ```
 
 <p align='center'>
     <img src="images/static_deployment/mm-deployment-5.gif">
 <p>
-
-### Configure a Virtual Host for NGINX
-
-When web browsers visit your project, they'll be making HTTP requests to your Nginx web server. However, Nginx doesn't know anything about your project by default. Therefor, a special configuration file needs to be created.
-
-#### Copy the Template
 
 Your starter files should have included a reference configuration in `guides/deployment/memory-match.example.conf`. Copy this file now, giving it a name that matches your project's subdomain.
 

@@ -141,31 +141,40 @@ Assuming that your application is backed by a PostgreSQL database, you'll need t
 
 ### Clone the Project
 
-When you have connected to your EC2 instance over SSH, you'll want to clone the project's source code into your home directory. Confirm that your current working directory is `/home/ubuntu` with the `pwd` command.
+While connected to your EC2 instance over SSH, you'll want to clone the project's source code into your home directory. Confirm that your current working directory is `/home/ubuntu` with the `pwd` command.
 
 ```bash
-pwd
+ubuntu@some-ip-address:~$ pwd
+/home/ubuntu
+ubuntu@some-ip-address:~$
 ```
 
-Ubuntu comes with `git` preinstalled so you can clone the project now. Replace `username` with the owner of the repository, `full-stack-project` with the name of the project, and `full-stack-project.learningfuze.com` with your project's subdomain. If the repository is private, then you'll be prompted for your GitHub username and password.
+Ubuntu comes with `git` pre-installed, so you can clone the project now. Use the `git clone` command to clone the project, passing it both the `<repository>` and `<directory>` arguments. `<repository>` should equal the project's clone address and `<directory>` should equal the [fully qualified domain name (FQDN)](https://en.wikipedia.org/wiki/Fully_qualified_domain_name), minus the trailing period (`.`), of the subdomain set up with the domain name registrar. If the repository is private, you'll be prompted for your GitHub username and password.
+
+> **Example**: If the project's GitHub repository is `username/project-name` and the project is being deployed to the `blog` subdomain of the `yourdomain.com` root domain, then cloning the project would look like:
 
 ```bash
-git clone https://github.com/username/full-stack-project full-stack-project.learningfuze.com
+ubuntu@some-ip-address:~$ git clone https://github.com/username/project-name.git blog.yourdomain.com
 ```
 
 After the project is successfully cloned, running the `ls` command should show the project directory.
 
 ```bash
-ls
+ubuntu@some-ip-address:~$ ls
+...     ...                             ...
+...     code-journal.yourdomain.com     ...
+...     ...                             ...
+ubuntu@some-ip-address:~$
 ```
+
+### Install NPM Packages
 
 The next few steps will be done from within the project directory, so change directories to the project. Replace `full-stack-project.learningfuze.com` with your subdomain.
 
 ```bash
-cd full-stack-project.learningfuze.com
+ubuntu@some-ip-address:~$ cd full-stack-project.learningfuze.com
+ubuntu@some-ip-address:~/full-stack-project.learningfuze.com$
 ```
-
-### Install NPM Packages
 
 Although your `node_modules` directory should have been ignored (via `.gitignore`), the project should have all of its JavaScript dependencies listed in `package.json` so you can download them now.
 
