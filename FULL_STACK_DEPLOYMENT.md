@@ -295,7 +295,7 @@ http localhost:3000/api/health-check
 
 ### Configure a Virtual Host for Nginx
 
-When web browsers visit your project, they'll be making HTTP requests to your Nginx web server. However, Nginx doesn't know anything about your project by default. Therefore, a special configuration file needs to be created.
+When web browsers visit your project, they'll be making HTTP requests to your NGINX web server. However, NGINX doesn't know anything about your project by default, it needs to be configured to serve up your project's site. A special configuration file needs to be created.
 
 #### Copy the Template
 
@@ -325,8 +325,8 @@ For example, if your project name is `fart-app` and your domain is `lol.com`, an
 
 ```conf
 server {
-    # The following server_name rule should equal the domain name for the
-    # project, including sub-domain.
+    # The following server_name rule should equal fully qualified domain name
+    # for the project, minus the trailing period.
     server_name fart-app.lol.com;
 
     # The following root rule should equal the full directory path of the

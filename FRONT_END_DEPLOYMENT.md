@@ -74,47 +74,27 @@ ubuntu@some-ip-address:~$
 
 ### Configure a Virtual Host for NGINX
 
-When web browsers visit your project, they'll be making HTTP requests to your NGINX web server. However, NGINX doesn't know anything about your project by default, it needs to be configured to serve up your project's site. A special configuration file needs to be created.
+When web browsers visit your project, they'll be making HTTP requests to your NGINX web server. However, by default NGINX doesn't know HTTP requests to the project's subdomain are valid. It needs to be configured to respond to those requests with the project's files. A special configuration file needs to be created.
 
-#### Copy the Template
+#### Create the Configuration File
 
-The next few steps will be done from within the project directory, so change directories to the project. Replace `code-journal.yourdomainhere.com` with your subdomain.
-
-```bash
-cd code-journal.yourdomainhere.com
-```
-
-<p align='center'>
-    <img src="images/static_deployment/mm-deployment-5.gif">
-<p>
-
-Your starter files should have included a reference configuration in `guides/deployment/memory-match.example.conf`. Copy this file now, giving it a name that matches your project's subdomain.
-
-> For example, if your project's subdomain is `memory-match.yourdomainhere.com`, then your configuration file's name should be `memory-match.yourdomainhere.com`. **There is no `.conf` at the end of the final file.**
-
-**Note:** The default `ubuntu` user account of your EC2 instance does not have permission to modify files outside of its home directory, so the `cp` command will need to start with `sudo` to temporarily use the `root` user account.
-
-```bash
-sudo cp guides/deployment/memory-match.example.conf /etc/nginx/sites-available/memory-match.yourdomainhere.com
-```
-
-#### Edit the Configuration File
-
-Now use `nano` to edit the copy you've created. Replace `memory-match.yourdomainhere.com` with your config file's name.
+Use `nano` to create and edit an NGINX config for your project. It should be created in the `/etc/nginx/sites-available/` directory, with a file name equal to the project's [fully qualified domain name (FQDN)](https://en.wikipedia.org/wiki/Fully_qualified_domain_name), minus the trailing period (`.`).
 
 **Note:** The default `ubuntu` user account of your EC2 instance does not have permission to modify files outside of its home directory, so the `nano` command will need to start with `sudo` to temporarily use the `root` user account.
 
+> **Example**:  If the project is being deployed to the `code-journal` subdomain of the `yourdomain.com` root domain, then you'd start editing the file like:
+
 ```bash
-sudo nano /etc/nginx/sites-available/memory-match.yourdomainhere.com
+ubuntu@some-ip-address:~$ sudo nano /etc/nginx/sites-available/code-journal.yourdomainhere.com
 ```
 
-Modify the `server_name` and `root` directives in the configuration file. For example, if your project name is `memory-match` and your domain is `yourdomainhere.com`, then your configuration file should look like this:
+Fill out the contents of the file to match the example config below, replacing the value of the `server_name` field with your FQDN.
 
 ```conf
 server {
-    # The following server_name rule should equal the domain name for the
-    # project, including sub-domain.
-    server_name memory-match.yourdomainhere.com;
+    # The following server_name rule should equal fully qualified domain name
+    # for the project, minus the trailing period.
+    server_name code-journal.yourdomainhere.com;
 
     # The following root rule should equal the full directory path of the
     # project's `index.html` file.
@@ -126,28 +106,34 @@ server {
 }
 ```
 
+After you're done editing the file's contents, save (write-out) the file, then quit `nano`.
+
 #### Enable the Site
 
-Once your configuration file has been edited, it's time to let Nginx know about it.
+Once your site's NGINX configuration file has been created, it's time to turn it on.
 
-**Note:** The default `ubuntu` user account of your EC2 instance does not have permission to modify files outside of its home directory, so the `ln` command will need to start with `sudo` to temporarily use the `root` user account. Replace `memory-match.yourdomainhere.com` with your own configuration file's name.
+**Note:** The default `ubuntu` user account of your EC2 instance does not have permission to modify files outside of its home directory, so the `ln` command will need to start with `sudo` to temporarily use the `root` user account. Replace `code-journal.yourdomainhere.com` with your own configuration file's name.
 
-1. Enable the site.
+1. Add the site to the list of enabled sites.
     ```bash
-    sudo ln -s /etc/nginx/sites-available/memory-match.yourdomainhere.com /etc/nginx/sites-enabled/
+    ubuntu@some-ip-address:~$ sudo ln -s /etc/nginx/sites-available/code-journal.yourdomainhere.com /etc/nginx/sites-enabled/
     ```
-1. Test your new configuration file. You should see confirmation messages that your configuration is valid.
+1. Test your new configuration file for valid syntax using the `nginx -t` tool. You should see confirmation messages that your configuration is valid.
     ```bash
-    sudo nginx -t
+    ubuntu@some-ip-address:~$ sudo nginx -t
+    nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+    nginx: configuration file /etc/nginx/nginx.conf test is successful
+    ubuntu@some-ip-address:~$
     ```
-1. Restart Nginx.
+1. Restart NGINX so it loads the changes into memory.
     ```bash
-    sudo service nginx restart
+    ubuntu@some-ip-address:~$ sudo service nginx restart
+    ubuntu@some-ip-address:~$
     ```
 
 #### Try it out!
 
-Your project is now deployed! You should be able to visit your subdomain in a web browser to see the landing page of the app. If your domain has a `.dev` extension you need to complete the next step before viewing your website.  That is because the `dev` extension is a secure namespace, so you need HTTPS and an SSL certificate for your website to load on most browsers.
+Your project is now deployed! You should be able to visit your subdomain in a web browser to see the landing page of the app. If your domain has a `.dev` extension you need to complete the next step before viewing your website. That is because the `dev` extension is a secure namespace, so you need HTTPS and an SSL certificate for your website to load on most browsers.
 
 #### Enable SSL with Certbot
 
@@ -179,10 +165,10 @@ To get started, SSH into your EC2 instance.
 
 ### Pull the Latest Commits
 
-Change directories to your project; it should be located at `/home/ubuntu/memory-match.yourdomainhere.com`. Change `memory-match.yourdomainhere.com` to your project's subdomain.
+Change directories to your project; it should be located at `/home/ubuntu/code-journal.yourdomainhere.com`. Change `code-journal.yourdomainhere.com` to your project's subdomain.
 
 ```bash
-cd /home/ubuntu/memory-match.yourdomainhere.com
+cd /home/ubuntu/code-journal.yourdomainhere.com
 ```
 
 Pull the `master` branch of your GitHub repository.
