@@ -133,7 +133,7 @@ Once your site's NGINX configuration file has been created, it's time to turn it
 
 #### Try it out!
 
-Your project is now deployed! You should be able to visit your subdomain in a web browser to see the landing page of the app. If your domain has a `.dev` extension you need to complete the next step before viewing your website. That is because the `dev` extension is a secure namespace, so you need HTTPS and an SSL certificate for your website to load on most browsers.
+Your project is now deployed! You should be able to visit your fully qualified domain name in a web browser to see the landing page of the app. If your domain has a `.dev` extension you need to complete the next step before viewing your website. That is because the `dev` extension is a secure namespace, so you need HTTPS and an SSL certificate for your website to load on most browsers.
 
 #### Enable SSL with Certbot
 
