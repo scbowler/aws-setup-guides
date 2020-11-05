@@ -137,12 +137,12 @@ Your project is now deployed! You should be able to visit your subdomain in a we
 
 #### Enable SSL with Certbot
 
-At this point, your web browser is not communicating with your application of a secure connection. Let's fix that! CertBot makes it easy to configure SSL for your project with one command.
+At this point, web browsers are communicating with your application over an insecure connection. Let's fix that! Certbot makes it easy to configure SSL for your project with one command.
 
 **Note:** The default `ubuntu` user account of your EC2 instance does not have permission to run the `certbot` command, so it will need to begin with `sudo` to temporarily use the `root` user account.
 
 ```bash
-sudo certbot --nginx
+ubuntu@some-ip-address:~$ sudo certbot --nginx
 ```
 
 The following items may be requested of you by `certbot` if this is your first time running it:
@@ -155,7 +155,7 @@ The following items may be requested of you by `certbot` if this is your first t
 
 #### Try it out again!!
 
-Visit your subdomain again in a web browser and you should see a lock in the URL bar indicating that you are visiting the app over a private SSL connection!! 🔒🔒🔒
+Visit your FQDN again in a web browser and you should see a lock in the URL bar indicating that you are visiting the app over a private SSL connection!! 🔒🔒🔒
 
 ## Deploying Updates
 
@@ -168,13 +168,13 @@ To get started, SSH into your EC2 instance.
 Change directories to your project; it should be located at `/home/ubuntu/code-journal.yourdomainhere.com`. Change `code-journal.yourdomainhere.com` to your project's subdomain.
 
 ```bash
-cd /home/ubuntu/code-journal.yourdomainhere.com
+ubuntu@some-ip-address:~$ cd /home/ubuntu/code-journal.yourdomainhere.com
 ```
 
 Pull the `master` branch of your GitHub repository.
 
 ```bash
-git pull origin master
+ubuntu@some-ip-address:~$ git pull origin master
 ```
 
 Now all of your most recent changes are downloaded!
