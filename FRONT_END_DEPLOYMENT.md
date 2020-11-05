@@ -12,20 +12,39 @@ Visit your domain name registrar and create a new `CNAME` DNS record for your pr
 
 > For example, if your domain name is `yourdomain.com` and your project's name is `code-journal`, then you'll create a `CNAME` record for `code-journal.yourdomain.com` that points to `yourdomain.com`.
 
-For additional help on creating a subdomain, follow the [DNS setup guide](DNS_SETUP.md).
+For additional help on creating a subdomain, follow the [DNS setup guide](DNS_SETUP.md#adding-a-cname-record).
 
-### Clone the Project
+## Connect to EC2
 
-Connect to your EC2 instance over SSH.
+All of the instructions in this guide require you to issue commands to your EC2 instance in an SSH session.
 
-For example:
+- On a **Mac OS** or **Linux** computer, open **Terminal**.
+- On a **Windows** computer, open **Git Bash**.
+
+Use the following `ssh` command to sign in. Replace `<your ip address>` with the IP address of your EC2 instance. Replace `path/to/key.pem` with the location of your own SSH key (_e.g._ `~/Desktop/aws-ec2.pem`).
+
 ```bash
-ssh -i <location of pem file> ubuntu@<ip address>
+ssh -i path/to/key.pem ubuntu@<your ip address>
 ```
 
-<p align='center'>
-    <img src="images/static_deployment/mm-deployment-2.gif">
-<p>
+> For example, if your SSH key is located on your `Desktop` and is named `aws-ec2.pem`, and your EC2 IP address is 111.222.333.444, then your command would be:<br>
+```bash
+ssh -i ~/Desktop/aws-ec2.pem ubuntu@111.222.333.444
+```
+
+After successfully connecting, your terminal window should show a prompt that looks something like this:
+
+```bash
+Welcome to Ubuntu 18.04...
+...
+ubuntu@some-ip-address:~$
+```
+
+> **Note**: `some-ip-address` is an internal IP address and will be _different_ than your EC2 instance's elastic IP address.
+
+If you are unable to connect, notify an instructor right away.
+
+### Clone the Project
 
 Clone the project's source code into your home directory. Confirm that your current working directory is `/home/ubuntu` with the `pwd` command.
 

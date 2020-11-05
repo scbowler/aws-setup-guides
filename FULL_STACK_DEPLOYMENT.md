@@ -16,7 +16,7 @@ For additional help on creating a subdomain, checkout the [DNS setup guide.](DNS
 
 ## Connect to EC2
 
-All of the instructions in this guide require you do issue commands to your EC2 instance in an SSH session.
+All of the instructions in this guide require you to issue commands to your EC2 instance in an SSH session.
 
 - On a **Mac OS** or **Linux** computer, open **Terminal**.
 - On a **Windows** computer, open **Git Bash**.
@@ -31,6 +31,16 @@ ssh -i path/to/key.pem ubuntu@<your ip address>
 ```bash
 ssh -i ~/Desktop/aws-ec2.pem ubuntu@111.222.333.444
 ```
+
+After successfully connecting, your terminal window should show a prompt that looks something like this:
+
+```bash
+Welcome to Ubuntu 18.04...
+...
+ubuntu@some-ip-address:~$
+```
+
+> **Note**: `some-ip-address` is an internal IP address and will be _different_ than your EC2 instance's elastic IP address.
 
 If you are unable to connect, notify an instructor right away.
 
