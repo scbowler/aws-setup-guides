@@ -174,7 +174,7 @@ ubuntu@some-ip-address:~$ cd /home/ubuntu/code-journal.yourdomainhere.com
 Pull the default branch (`main`) of your project's GitHub repository.
 
 ```bash
-ubuntu@some-ip-address:~$ git pull origin main
+ubuntu@some-ip-address:~/code-journal.yourdomainhere.com$ git pull origin main
 ```
 
 Now all of your most recent changes are downloaded!
