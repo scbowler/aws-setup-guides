@@ -5,18 +5,16 @@ This guide will walk you through setting up DNS records for your domain name.
 Upon completion of adding your DNS records, check out the following guides to finish your deployments.
 
 - [Deploying a Full Stack Application](./FULL_STACK_DEPLOYMENT.md)
-- [Deploying a Static Application](./STATIC_DEPLOYMENT.md)
+- [Deploying a Front-End Application](./FRONT_END_DEPLOYMENT.md)
 
 ## Adding an A Record
 
-A Records are the most basic type of DNS record and are used to point a domain or subdomain to an IP address.  You only need to do this the first time you are setting up your EC2 instance.  Once you have allocated an Elastic IP address to your EC2 instance, you must add an `A Record` to have your domain name service point to ip address where your nginx server is hosted.
-
+A Records are the most basic type of DNS record and are used to point a domain or subdomain to an IP address. It only needs to be done the first time a domain name is set up. Get the Elastic IP address of your EC2 instance. Then add an `A Record` to have your domain name service point to the Elastic IP address of your EC2 instance.
 
 Adding an A Record on:
-- [namecheap.com](#adding-an-a-record-on:-namecheap.com)
-- [name.com](#adding-an-a-record-on:-name.com)
-- [hover.com](#adding-an-a-record-on:-hover.com)
-
+- [namecheap.com](#adding-an-a-record-on-namecheapcom)
+- [name.com](#adding-an-a-record-on-namecom)
+- [hover.com](#adding-an-a-record-on-hovercom)
 
 ### Adding an A Record on: namecheap.com
 
@@ -40,12 +38,9 @@ Adding an A Record on:
     1. The second field is `@` (the @ symbol represents your root domain.)
     1. The third field is the Elastic IP address you allocated to your EC2 instance.
 
-
-
     ![namecheap domain manage](images/dns_setup/namecheap-4.png)
 
-    [Adding a CNAME Record on: namecheap.com](#adding-a-cname-record-on:-namecheap.com)
-
+1. [Adding a CNAME Record](#adding-a-cname-record)
 
 ### Adding an A Record on: name.com
 
@@ -67,8 +62,7 @@ Adding an A Record on:
 
     ![name domain manage](images/dns_setup/name-3.png)
 
-    [Adding a CNAME Record on: name.com](#adding-a-cname-record-on:-name.com)
-
+1. [Adding a CNAME Record](#adding-a-cname-record)
 
 ### Adding an A Record on: hover.com
 
@@ -94,19 +88,20 @@ Adding an A Record on:
 
     ![hover domain manage](images/dns_setup/hover-4.png)
 
-    [Adding a CNAME Record on: hover.com](#adding-a-cname-record-on:-hover.com)
-
+1. [Adding a CNAME Record](#adding-a-cname-record)
 
 ___
 
 ## Adding a CNAME Record
 
-The DNS CNAME record works as an alias for domain names that share a single IP address.  CNAME records tell DNS resolvers to use the same IP address as your A record. With multiple web applications, you create multiple CNAME records so if you ever have to change your IP address, you only have to do it once. Every time you want to deploy a web application for your portfolio, you will need to do this.
+The DNS CNAME record works as an alias for domain names that share a single IP address. CNAME records tell DNS resolvers to use the same IP address as your A record. With multiple web applications, you create multiple CNAME records so if you ever have to change your IP address, you only have to do it once. Every time you want to deploy a web application under a sub-domain for your portfolio, you will need to do this.
+
+> **NOTE**: If you are deploying a web application under the root domain name (no sub-domain), there is no need to add a CNAME record for it: the [A record](#adding-an-a-record) should already cover it. _However_, since people have a habit of adding the `www` subdomain, it would be prudent to set that up, either as a `302 Found` temporary redirect (preferred) or as a CNAME (requires extra NGINX web server config).
 
 Adding a CNAME Record on:
-- [namecheap.com](#adding-a-cname-record-on:-namecheap.com)
-- [name.com](#adding-a-cname-record-on:-name.com)
-- [hover.com](#adding-a-cname-record-on:-hover.com)
+- [namecheap.com](#adding-a-cname-record-on-namecheapcom)
+- [name.com](#adding-a-cname-record-on-namecom)
+- [hover.com](#adding-a-cname-record-on-hovercom)
 
 ### Adding a CNAME Record on: namecheap.com
 

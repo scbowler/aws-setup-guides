@@ -1,12 +1,22 @@
-# Deployment to Ubuntu on AWS EC2
+# Deploying a Full-Stack Web App to NGINX an an AWS EC2 Host w/Ubuntu 18.04
 
-This guide outlines steps for deploying a full stack JavaScript project to an EC2 instance on AWS. **Required tools**, **initial deployment**, and **deploying updates** are covered. The guide assumes that you have already provisioned an EC2 instance and that you have SSH access to the instance. Some parts of this guide may have been covered during class, but they are recorded here for future reference.
+This guide outlines steps for deploying a full-stack JavaScript project to an NGINX web server running on an AWS EC2 instance with an Ubuntu 18.04 operating system. For instructions on how to deploy a front-end-only application, please see the [Front-End Deployment Guide](FRONT_END_DEPLOYMENT.md).
 
-**Note:** This guide may use "EC2 Instance" and "Ubuntu" interchangeably, because your EC2 instance _should_ be running the Ubuntu operating system.
+## Required Tools
+
+This guide assumes that you have already [provisioned an AWS EC2 instance with SSH access](AWS_EC2_INITIAL_SETUP.md), with both [NGINX](INSTALL_NGINX_ON_UBUNTU.md) and [certbot](https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx) installed on it. It also assumes you have already purchased a domain name.
+
+### Create a Subdomain
+
+Visit your domain name registrar and create a new `CNAME` DNS record for your project. The `CNAME` record should point to your root domain name.
+
+> For example, if your domain name is `learningfuze.com` and your project's name is `full-stack-project`, then you'll create a `CNAME` record for `full-stack-project.learningfuze.com` that points to `learningfuze.com`.
+
+For additional help on creating a subdomain, checkout the [DNS setup guide.](DNS_SETUP.md)
 
 ## Connect to EC2
 
-All of the instructions in this guide require you do issue commands to your EC2 instance in an SSH session.
+All of the instructions in this guide require you to issue commands to your EC2 instance in an SSH session.
 
 - On a **Mac OS** or **Linux** computer, open **Terminal**.
 - On a **Windows** computer, open **Git Bash**.
@@ -21,6 +31,16 @@ ssh -i path/to/key.pem ubuntu@<your ip address>
 ```bash
 ssh -i ~/Desktop/aws-ec2.pem ubuntu@111.222.333.444
 ```
+
+After successfully connecting, your terminal window should show a prompt that looks something like this:
+
+```bash
+Welcome to Ubuntu 18.04...
+...
+ubuntu@some-ip-address:~$
+```
+
+> **Note**: `some-ip-address` is an internal IP address and will be _different_ than your EC2 instance's elastic IP address.
 
 If you are unable to connect, notify an instructor right away.
 
@@ -84,27 +104,6 @@ This application will manage the databases of your projects.
 sudo apt install postgresql
 ```
 
-### Install the Nginx Web Server
-
-Clients will not be connecting directly to your Node.js web server. All traffic will be ultimately routed to Nginx before Nginx forwards requests to your Node.js web server. You will also be configuring SSL for Nginx instead of Node.js so be sure that `nginx` is installed.
-
-```bash
-sudo apt install nginx
-```
-
-### Enable Free SSL Certificates with CertBot
-
-To make sure that communication between clients and your app are encrypted and private, you'll want to set up CertBot. The official instructions are located at [`https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx`](https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx), but for now, you'll only be following a couple of steps from the original instructions.
-
-1. Include the `certbot` package list in Ubuntu's available packages.
-    ```bash
-    sudo add-apt-repository ppa:certbot/certbot
-    ```
-1. Install `certbot` and the required plugins for Nginx.
-    ```bash
-    sudo apt install certbot python-certbot-nginx
-    ```
-
 ### Initial Setup Complete!
 
 Once the above are installed and configured, your EC2 instance is ready for full stack JavaScript projects!
@@ -114,14 +113,6 @@ Once the above are installed and configured, your EC2 instance is ready for full
 The first time you deploy a full stack JavaScript project, you'll need to do some extra configuration, but when deploying updates of the application, these steps can be skipped.
 
 This portion of the guide assumes that you have already registered a custom domain name with a provider like hover.com or name.com. This guide also assumes that you have added an `A` record to your domain's DNS settings that points to the Elastic IP address associated with your EC2 instance.
-
-### Create a Subdomain
-
-Visit your domain name registrar and create a new `CNAME` DNS record for your project. The `CNAME` record should point to your main domain name.
-
-> For example, if your domain name is `learningfuze.com` and your project's name is `full-stack-project`, then you'll create a `CNAME` record for `full-stack-project.learningfuze.com` that points to `learningfuze.com`.
-
-For additional help on creating a subdomain, checkout the [DNS setup guide.](./DNS_SETUP.md)
 
 ### Create a Database and Credentials
 
@@ -150,31 +141,40 @@ Assuming that your application is backed by a PostgreSQL database, you'll need t
 
 ### Clone the Project
 
-When you have connected to your EC2 instance over SSH, you'll want to clone the project's source code into your home directory. Confirm that your current working directory is `/home/ubuntu` with the `pwd` command.
+While connected to your EC2 instance over SSH, you'll want to clone the project's source code into your home directory. Confirm that your current working directory is `/home/ubuntu` with the `pwd` command.
 
 ```bash
-pwd
+ubuntu@some-ip-address:~$ pwd
+/home/ubuntu
+ubuntu@some-ip-address:~$
 ```
 
-Ubuntu comes with `git` preinstalled so you can clone the project now. Replace `username` with the owner of the repository, `full-stack-project` with the name of the project, and `full-stack-project.learningfuze.com` with your project's subdomain. If the repository is private, then you'll be prompted for your GitHub username and password.
+Ubuntu comes with `git` pre-installed, so you can clone the project now. Use the `git clone` command to clone the project, passing it both the `<repository>` and `<directory>` arguments. `<repository>` should equal the project's clone address and `<directory>` should equal the [fully qualified domain name (FQDN)](https://en.wikipedia.org/wiki/Fully_qualified_domain_name), minus the trailing period (`.`), of the subdomain set up with the domain name registrar. If the repository is private, you'll be prompted for your GitHub username and password.
+
+> **Example**: If the project's GitHub repository is `username/project-name` and the project is being deployed to the `blog` subdomain of the `yourdomain.com` root domain, then cloning the project would look like:
 
 ```bash
-git clone https://github.com/username/full-stack-project full-stack-project.learningfuze.com
+ubuntu@some-ip-address:~$ git clone https://github.com/username/project-name.git blog.yourdomain.com
 ```
 
 After the project is successfully cloned, running the `ls` command should show the project directory.
 
 ```bash
-ls
+ubuntu@some-ip-address:~$ ls
+...     ...                             ...
+...     code-journal.yourdomain.com     ...
+...     ...                             ...
+ubuntu@some-ip-address:~$
 ```
+
+### Install NPM Packages
 
 The next few steps will be done from within the project directory, so change directories to the project. Replace `full-stack-project.learningfuze.com` with your subdomain.
 
 ```bash
-cd full-stack-project.learningfuze.com
+ubuntu@some-ip-address:~$ cd full-stack-project.learningfuze.com
+ubuntu@some-ip-address:~/full-stack-project.learningfuze.com$
 ```
-
-### Install NPM Packages
 
 Although your `node_modules` directory should have been ignored (via `.gitignore`), the project should have all of its JavaScript dependencies listed in `package.json` so you can download them now.
 
@@ -295,7 +295,7 @@ http localhost:3000/api/health-check
 
 ### Configure a Virtual Host for Nginx
 
-When web browsers visit your project, they'll be making HTTP requests to your Nginx web server. However, Nginx doesn't know anything about your project by default. Therefore, a special configuration file needs to be created.
+When web browsers visit your project, they'll be making HTTP requests to your NGINX web server. However, NGINX doesn't know anything about your project by default, it needs to be configured to serve up your project's site. A special configuration file needs to be created.
 
 #### Copy the Template
 
@@ -325,8 +325,8 @@ For example, if your project name is `fart-app` and your domain is `lol.com`, an
 
 ```conf
 server {
-    # The following server_name rule should equal the domain name for the
-    # project, including sub-domain.
+    # The following server_name rule should equal the fully qualified domain
+    # name for the project, minus the trailing period.
     server_name fart-app.lol.com;
 
     # The following root rule should equal the full directory path of the
