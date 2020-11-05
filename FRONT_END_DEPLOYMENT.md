@@ -21,13 +21,13 @@ All of the instructions in this guide require you to issue commands to your EC2 
 - On a **Mac OS** or **Linux** computer, open **Terminal**.
 - On a **Windows** computer, open **Git Bash**.
 
-Use the following `ssh` command to sign in. Replace `<your ip address>` with the IP address of your EC2 instance. Replace `path/to/key.pem` with the location of your own SSH key (_e.g._ `~/Desktop/aws-ec2.pem`).
+Use the following `ssh` command to sign in. Replace `<your ip address>` with the Elastic IP address of your EC2 instance. Replace `path/to/key.pem` with the location of your own SSH key (_e.g._ `~/Desktop/aws-ec2.pem`).
 
 ```bash
 ssh -i path/to/key.pem ubuntu@<your ip address>
 ```
 
-> For example, if your SSH key is located on your `Desktop` and is named `aws-ec2.pem`, and your EC2 IP address is 111.222.333.444, then your command would be:<br>
+> For example, if your SSH key is located on your `Desktop` and is named `aws-ec2.pem`, and your EC2 instance's Elastic IP address is 111.222.333.444, then your command would be:<br>
 ```bash
 ssh -i ~/Desktop/aws-ec2.pem ubuntu@111.222.333.444
 ```
@@ -40,7 +40,7 @@ Welcome to Ubuntu 18.04...
 ubuntu@some-ip-address:~$
 ```
 
-> **Note**: `some-ip-address` is an internal IP address and will be _different_ than your EC2 instance's elastic IP address.
+> **Note**: `some-ip-address` is an internal IP address and will be _different_ than your EC2 instance's Elastic IP address.
 
 If you are unable to connect, notify an instructor right away.
 
@@ -92,8 +92,8 @@ Fill out the contents of the file to match the example config below, replacing t
 
 ```conf
 server {
-    # The following server_name rule should equal fully qualified domain name
-    # for the project, minus the trailing period.
+    # The following server_name rule should equal the fully qualified domain
+    # name for the project, minus the trailing period.
     server_name code-journal.yourdomain.com;
 
     # The following root rule should equal the full directory path of the

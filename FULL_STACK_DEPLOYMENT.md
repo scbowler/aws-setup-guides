@@ -325,8 +325,8 @@ For example, if your project name is `fart-app` and your domain is `lol.com`, an
 
 ```conf
 server {
-    # The following server_name rule should equal fully qualified domain name
-    # for the project, minus the trailing period.
+    # The following server_name rule should equal the fully qualified domain
+    # name for the project, minus the trailing period.
     server_name fart-app.lol.com;
 
     # The following root rule should equal the full directory path of the
