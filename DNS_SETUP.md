@@ -12,9 +12,9 @@ Upon completion of adding your DNS records, check out the following guides to fi
 A Records are the most basic type of DNS record and are used to point a domain or subdomain to an IP address. It only needs to be done the first time a domain name is set up. Get the Elastic IP address of your EC2 instance. Then add an `A Record` to have your domain name service point to the Elastic IP address of your EC2 instance.
 
 Adding an A Record on:
-- [namecheap.com](#adding-an-a-record-on:-namecheap.com)
-- [name.com](#adding-an-a-record-on:-name.com)
-- [hover.com](#adding-an-a-record-on:-hover.com)
+- [namecheap.com](#adding-an-a-record-on-namecheapcom)
+- [name.com](#adding-an-a-record-on-namecom)
+- [hover.com](#adding-an-a-record-on-hovercom)
 
 ### Adding an A Record on: namecheap.com
 
@@ -103,9 +103,9 @@ The DNS CNAME record works as an alias for domain names that share a single IP a
 > **NOTE**: If you are deploying a web application under the root domain name (no sub-domain), there is no need to add a CNAME record for it: the [A record](#adding-an-a-record) should already cover it. _However_, since people have a habit of adding the `www` subdomain, it would be prudent to set that up, either as a `302 Found` temporary redirect (preferred) or as a CNAME (requires extra NGINX web server config).
 
 Adding a CNAME Record on:
-- [namecheap.com](#adding-a-cname-record-on:-namecheap.com)
-- [name.com](#adding-a-cname-record-on:-name.com)
-- [hover.com](#adding-a-cname-record-on:-hover.com)
+- [namecheap.com](#adding-a-cname-record-on-namecheapcom)
+- [name.com](#adding-a-cname-record-on-namecom)
+- [hover.com](#adding-a-cname-record-on-hovercom)
 
 ### Adding a CNAME Record on: namecheap.com
 
