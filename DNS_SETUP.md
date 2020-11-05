@@ -38,12 +38,9 @@ Adding an A Record on:
     1. The second field is `@` (the @ symbol represents your root domain.)
     1. The third field is the Elastic IP address you allocated to your EC2 instance.
 
-
-
     ![namecheap domain manage](images/dns_setup/namecheap-4.png)
 
-    [Adding a CNAME Record on: namecheap.com](#adding-a-cname-record-on:-namecheap.com)
-
+1. [Adding a CNAME Record](#adding-a-cname-record)
 
 ### Adding an A Record on: name.com
 
@@ -65,8 +62,7 @@ Adding an A Record on:
 
     ![name domain manage](images/dns_setup/name-3.png)
 
-    [Adding a CNAME Record on: name.com](#adding-a-cname-record-on:-name.com)
-
+1. [Adding a CNAME Record](#adding-a-cname-record)
 
 ### Adding an A Record on: hover.com
 
@@ -92,7 +88,7 @@ Adding an A Record on:
 
     ![hover domain manage](images/dns_setup/hover-4.png)
 
-    [Adding a CNAME Record on: hover.com](#adding-a-cname-record-on:-hover.com)
+1. [Adding a CNAME Record](#adding-a-cname-record)
 
 ___
 
