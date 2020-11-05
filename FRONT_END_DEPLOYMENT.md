@@ -1,24 +1,16 @@
 # Deploying a Front-End Web App to NGINX on an AWS EC2 Host w/Ubuntu 18.04
 
-This guide outlines steps for deploying a web application without any custom back-end code to an NGINX web server running on an AWS EC2 instance with an Ubuntu 18.04 operating system. For instructions on how to deploy a full-stack application please see the [Full-Stack Deployment Guide](FULL_STACK_DEPLOYMENT.md). Some parts of this guide may have been covered during class, but they are recorded here for future reference.
-
-**Note:** This guide may use "EC2 Instance" and "Ubuntu" interchangeably.
+This guide outlines steps for deploying a web application without any custom back-end code to an NGINX web server running on an AWS EC2 instance with an Ubuntu 18.04 operating system. For instructions on how to deploy a full-stack application, please see the [Full-Stack Deployment Guide](FULL_STACK_DEPLOYMENT.md).
 
 ## Required Tools
 
-This guide assumes that you have already [provisioned an EC2 instance with SSH access](AWS_EC2_INITIAL_SETUP.md), and have installed [NGINX](INSTALL_NGINX_ON_UBUNTU.md) and [certbot](https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx) on it. It also assumes you have already purchased a domain name.
+This guide assumes that you have already [provisioned an AWS EC2 instance with SSH access](AWS_EC2_INITIAL_SETUP.md), with both [NGINX](INSTALL_NGINX_ON_UBUNTU.md) and [certbot](https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx) installed on it. It also assumes you have already purchased a domain name.
 
 ### Create a Subdomain
 
 Visit your domain name registrar and create a new `CNAME` DNS record for your project. The `CNAME` record should point to your main domain name.
 
-> For example, if your domain name is `yourdomain.com` and your project's name is `memory-match`, then you'll create a `CNAME` record for `memory-match.yourdomain.com` that points to `yourdomain.com`.
-
-Watch how a `memory-match` subdomain is set up on [namecheap.com](https://www.namecheap.com):
-
-<p align='center'>
-    <img src="images/static_deployment/mm-deployment-1.gif" alt="Memory Match DNS Setup on namecheap.com">
-<p>
+> For example, if your domain name is `yourdomain.com` and your project's name is `code-journal`, then you'll create a `CNAME` record for `code-journal.yourdomain.com` that points to `yourdomain.com`.
 
 For additional help on creating a subdomain, follow the [DNS setup guide](DNS_SETUP.md).
 

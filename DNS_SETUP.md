@@ -5,18 +5,16 @@ This guide will walk you through setting up DNS records for your domain name.
 Upon completion of adding your DNS records, check out the following guides to finish your deployments.
 
 - [Deploying a Full Stack Application](./FULL_STACK_DEPLOYMENT.md)
-- [Deploying a Static Application](./STATIC_DEPLOYMENT.md)
+- [Deploying a Front-End Application](./FRONT_END_DEPLOYMENT.md)
 
 ## Adding an A Record
 
-A Records are the most basic type of DNS record and are used to point a domain or subdomain to an IP address.  You only need to do this the first time you are setting up your EC2 instance.  Once you have allocated an Elastic IP address to your EC2 instance, you must add an `A Record` to have your domain name service point to ip address where your nginx server is hosted.
-
+A Records are the most basic type of DNS record and are used to point a domain or subdomain to an IP address. You only need to do this the first time you are setting up a domain name. Once you have allocated an Elastic IP address to your EC2 instance, you must add an `A Record` to have your domain name service point to the Elastic IP address of your EC2 instance.
 
 Adding an A Record on:
 - [namecheap.com](#adding-an-a-record-on:-namecheap.com)
 - [name.com](#adding-an-a-record-on:-name.com)
 - [hover.com](#adding-an-a-record-on:-hover.com)
-
 
 ### Adding an A Record on: namecheap.com
 
@@ -101,7 +99,7 @@ ___
 
 ## Adding a CNAME Record
 
-The DNS CNAME record works as an alias for domain names that share a single IP address.  CNAME records tell DNS resolvers to use the same IP address as your A record. With multiple web applications, you create multiple CNAME records so if you ever have to change your IP address, you only have to do it once. Every time you want to deploy a web application for your portfolio, you will need to do this.
+The DNS CNAME record works as an alias for domain names that share a single IP address. CNAME records tell DNS resolvers to use the same IP address as your A record. With multiple web applications, you create multiple CNAME records so if you ever have to change your IP address, you only have to do it once. Every time you want to deploy a web application under a sub-domain for your portfolio, you will need to do this.
 
 Adding a CNAME Record on:
 - [namecheap.com](#adding-a-cname-record-on:-namecheap.com)

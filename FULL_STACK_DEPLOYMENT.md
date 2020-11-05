@@ -1,8 +1,18 @@
-# Deployment to Ubuntu on AWS EC2
+# Deploying a Full-Stack Web App to NGINX an an AWS EC2 Host w/Ubuntu 18.04
 
-This guide outlines steps for deploying a full stack JavaScript project to an EC2 instance on AWS. **Required tools**, **initial deployment**, and **deploying updates** are covered. The guide assumes that you have already provisioned an EC2 instance and that you have SSH access to the instance. Some parts of this guide may have been covered during class, but they are recorded here for future reference.
+This guide outlines steps for deploying a full-stack JavaScript project to an NGINX web server running on an AWS EC2 instance with an Ubuntu 18.04 operating system. For instructions on how to deploy a front-end-only application, please see the [Front-End Deployment Guide](FRONT_END_DEPLOYMENT.md).
 
-**Note:** This guide may use "EC2 Instance" and "Ubuntu" interchangeably, because your EC2 instance _should_ be running the Ubuntu operating system.
+## Required Tools
+
+This guide assumes that you have already [provisioned an AWS EC2 instance with SSH access](AWS_EC2_INITIAL_SETUP.md), with both [NGINX](INSTALL_NGINX_ON_UBUNTU.md) and [certbot](https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx) installed on it. It also assumes you have already purchased a domain name.
+
+### Create a Subdomain
+
+Visit your domain name registrar and create a new `CNAME` DNS record for your project. The `CNAME` record should point to your root domain name.
+
+> For example, if your domain name is `learningfuze.com` and your project's name is `full-stack-project`, then you'll create a `CNAME` record for `full-stack-project.learningfuze.com` that points to `learningfuze.com`.
+
+For additional help on creating a subdomain, checkout the [DNS setup guide.](DNS_SETUP.md)
 
 ## Connect to EC2
 
@@ -84,27 +94,6 @@ This application will manage the databases of your projects.
 sudo apt install postgresql
 ```
 
-### Install the Nginx Web Server
-
-Clients will not be connecting directly to your Node.js web server. All traffic will be ultimately routed to Nginx before Nginx forwards requests to your Node.js web server. You will also be configuring SSL for Nginx instead of Node.js so be sure that `nginx` is installed.
-
-```bash
-sudo apt install nginx
-```
-
-### Enable Free SSL Certificates with CertBot
-
-To make sure that communication between clients and your app are encrypted and private, you'll want to set up CertBot. The official instructions are located at [`https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx`](https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx), but for now, you'll only be following a couple of steps from the original instructions.
-
-1. Include the `certbot` package list in Ubuntu's available packages.
-    ```bash
-    sudo add-apt-repository ppa:certbot/certbot
-    ```
-1. Install `certbot` and the required plugins for Nginx.
-    ```bash
-    sudo apt install certbot python-certbot-nginx
-    ```
-
 ### Initial Setup Complete!
 
 Once the above are installed and configured, your EC2 instance is ready for full stack JavaScript projects!
@@ -114,14 +103,6 @@ Once the above are installed and configured, your EC2 instance is ready for full
 The first time you deploy a full stack JavaScript project, you'll need to do some extra configuration, but when deploying updates of the application, these steps can be skipped.
 
 This portion of the guide assumes that you have already registered a custom domain name with a provider like hover.com or name.com. This guide also assumes that you have added an `A` record to your domain's DNS settings that points to the Elastic IP address associated with your EC2 instance.
-
-### Create a Subdomain
-
-Visit your domain name registrar and create a new `CNAME` DNS record for your project. The `CNAME` record should point to your main domain name.
-
-> For example, if your domain name is `learningfuze.com` and your project's name is `full-stack-project`, then you'll create a `CNAME` record for `full-stack-project.learningfuze.com` that points to `learningfuze.com`.
-
-For additional help on creating a subdomain, checkout the [DNS setup guide.](./DNS_SETUP.md)
 
 ### Create a Database and Credentials
 
