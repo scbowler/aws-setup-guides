@@ -171,10 +171,10 @@ Change directories to your project; it should be located at `/home/ubuntu/code-j
 ubuntu@some-ip-address:~$ cd /home/ubuntu/code-journal.yourdomainhere.com
 ```
 
-Pull the `master` branch of your GitHub repository.
+Pull the default branch (`main`) of your project's GitHub repository.
 
 ```bash
-ubuntu@some-ip-address:~$ git pull origin master
+ubuntu@some-ip-address:~$ git pull origin main
 ```
 
 Now all of your most recent changes are downloaded!
