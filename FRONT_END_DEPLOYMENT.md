@@ -8,7 +8,7 @@ This guide assumes that you have already [provisioned an AWS EC2 instance with S
 
 ### Create a Subdomain
 
-Visit your domain name registrar and create a new `CNAME` DNS record for your project. The `CNAME` record should point to your main domain name.
+Visit your domain name registrar and create a new `CNAME` DNS record for your project. The `CNAME` record should point to your root domain name.
 
 > For example, if your domain name is `yourdomain.com` and your project's name is `code-journal`, then you'll create a `CNAME` record for `code-journal.yourdomain.com` that points to `yourdomain.com`.
 
