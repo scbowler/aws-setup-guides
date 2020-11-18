@@ -1,4 +1,4 @@
-# Deploying a Full-Stack Web App to NGINX an an AWS EC2 Host w/Ubuntu 18.04
+# Deploying a Full-Stack Web App to NGINX on an AWS EC2 Host w/Ubuntu 18.04
 
 This guide outlines steps for deploying a full-stack JavaScript project to an NGINX web server running on an AWS EC2 instance with an Ubuntu 18.04 operating system. For instructions on how to deploy a front-end-only application, please see the [Front-End Deployment Guide](FRONT_END_DEPLOYMENT.md).
 
